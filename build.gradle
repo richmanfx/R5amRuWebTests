@@ -1,0 +1,80 @@
+group 'ru.r5am'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    apply plugin: "java"
+
+    defaultTasks "test"
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+
+    // The encoding of the source - UTF-8
+    [compileJava, compileTestJava]*.options*.encoding = "UTF-8"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.8.1"
+    }
+}
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+
+    testImplementation "org.testng:testng:7.0.0"
+
+    testCompile "com.codeborne:selenide:5.2.8"
+
+    testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
+    testImplementation "org.apache.logging.log4j:log4j-core:2.11.1"
+    testImplementation "org.apache.logging.log4j:log4j-jul:2.11.1"
+    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+
+    testImplementation "org.aeonbits.owner:owner:1.0.10"
+
+    testImplementation "io.qameta.allure:allure-gradle:2.8.1"
+    testImplementation "io.qameta.allure:allure-testng:2.12.1"
+    testImplementation "io.qameta.allure:allure-selenide:2.12.1"
+    testImplementation "org.aspectj:aspectjweaver:1.9.4"
+
+}
+
+// Ignore Gradle warning "Detecting annotation processors on the compile classpath has been deprecated... "
+compileTestJava {
+    options.compilerArgs += ["-proc:none"]
+}
+
+test {
+    useTestNG()
+    dependsOn "clean"       // Always run tests even if nothing has changed
+    options.suites "src/test/resources/testng.xml"
+
+    // Show "PASSED", "SKIPPED", "FAILED" test results in console
+    testLogging { events "passed", "skipped", "failed" }
+}
+
+
+tasks.withType(Test) {
+//    reports.html.enabled = false        // Disable HTML report
+}
+
+
+//allure {
+//    version = "2.12.1"
+//    aspectjweaver = true
+//    autoconfigure = true
+//    clean = true        // --clean option for the Allure commandline tool
+//}
