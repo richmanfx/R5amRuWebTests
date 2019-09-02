@@ -50,6 +50,10 @@ dependencies {
     testImplementation "io.qameta.allure:allure-selenide:2.12.1"
     testImplementation "org.aspectj:aspectjweaver:1.9.4"
 
+    testImplementation "org.springframework:spring-core:5.1.9.RELEASE"
+    testImplementation "org.springframework:spring-beans:5.1.9.RELEASE"
+    testImplementation "org.springframework:spring-context:5.1.9.RELEASE"
+
 }
 
 // Ignore Gradle warning "Detecting annotation processors on the compile classpath has been deprecated... "
