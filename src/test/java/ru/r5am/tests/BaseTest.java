@@ -10,12 +10,13 @@ import com.codeborne.selenide.Configuration;
 
 import ru.r5am.config.AppConfig;
 
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class BaseTest {
 
-    BaseTest() {}
+    protected BaseTest() {}
 
     private static final Logger log = LogManager.getLogger();
     private static AppConfig config = ConfigFactory.create(AppConfig.class);
@@ -45,6 +46,14 @@ public class BaseTest {
             Configuration.browserCapabilities.setCapability("enableVNC", true);
         }
 
+    }
+
+    /**
+     * TODO: Временно!!!
+     */
+    @BeforeSuite
+    public static void openSite() {
+        open(config.testUrl());
     }
 
     /**
