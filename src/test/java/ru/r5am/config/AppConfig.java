@@ -8,6 +8,9 @@ public interface AppConfig extends Config {
 
     String testUrl();
 
+    @DefaultValue("true")
+    Boolean ciServerFlag();
+
     @DefaultValue("4")
     int failTestTimeout();
 
@@ -18,7 +21,7 @@ public interface AppConfig extends Config {
     String remoteSeleniumHub();
 
     @DefaultValue("4444")
-    int remoteSeleniumHubPort();
+    String remoteSeleniumHubPort();
 
     @DefaultValue("chrome")
     String browser();
