@@ -1,8 +1,22 @@
 group 'ru.r5am'
 version '1.0-SNAPSHOT'
 
-apply plugin: "java"
 defaultTasks "test"
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.8.1"
+    }
+}
+
+apply plugin: "java"
+apply plugin: "io.qameta.allure"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -17,15 +31,20 @@ repositories {
 
 dependencies {
 
+    def log4jVersion = "2.11.1"
+    def jacksonVersion = "2.9.8"
+    def springVersion = "5.1.9.RELEASE"
+
+
     testImplementation "org.testng:testng:7.0.0"
 
     testCompile "com.codeborne:selenide:5.2.8"
 
-    testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:2.11.1"
-    testImplementation "org.apache.logging.log4j:log4j-core:2.11.1"
-    testImplementation "org.apache.logging.log4j:log4j-jul:2.11.1"
-    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8"
-    testImplementation "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+    testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
+    testImplementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
+    testImplementation "org.apache.logging.log4j:log4j-jul:${log4jVersion}"
+    testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${jacksonVersion}"
+    testImplementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
 
     testImplementation "org.aeonbits.owner:owner:1.0.10"
 
@@ -34,9 +53,10 @@ dependencies {
     testImplementation "io.qameta.allure:allure-selenide:2.12.1"
     testImplementation "org.aspectj:aspectjweaver:1.9.4"
 
-    testImplementation "org.springframework:spring-core:5.1.9.RELEASE"
-    testImplementation "org.springframework:spring-beans:5.1.9.RELEASE"
-    testImplementation "org.springframework:spring-context:5.1.9.RELEASE"
+
+    testImplementation "org.springframework:spring-core:${springVersion}"
+    testImplementation "org.springframework:spring-beans:${springVersion}"
+    testImplementation "org.springframework:spring-context:${springVersion}"
 
 }
 
@@ -60,9 +80,9 @@ tasks.withType(Test) {
 }
 
 
-//allure {
-//    version = "2.12.1"
-//    aspectjweaver = true
-//    autoconfigure = true
-//    clean = true        // --clean option for the Allure commandline tool
-//}
+allure {
+    version = "2.12.1"
+    aspectjweaver = true
+    autoconfigure = true
+    clean = true        // --clean option for the Allure commandline tool
+}

@@ -15,7 +15,9 @@ public class Smoke extends BaseTest {
 
     @Test(description = "Проверка отображения стартовой страницы")
     public void startPageDisplayCheck() {
-        StartPage startPage = new StartPage();
+//        StartPage startPage = new StartPage();
+        StartPage startPage = (StartPage) context.getBean("startPage");
+
         startPage.checkPageShow();
     }
 }

@@ -3,6 +3,8 @@ package ru.r5am.tests;
 
 import org.apache.logging.log4j.Logger;
 import org.aeonbits.owner.ConfigFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.apache.logging.log4j.LogManager;
@@ -20,6 +22,7 @@ public class BaseTest {
 
     private static final Logger log = LogManager.getLogger();
     private static AppConfig config = ConfigFactory.create(AppConfig.class);
+    protected ApplicationContext context = new ClassPathXmlApplicationContext("AppContext.xml");
 
     /**
      * Сконфигурировать Selenide
@@ -67,4 +70,5 @@ public class BaseTest {
             sleep(sleepTime * 1000L);        // в миллисекундах
         }
     }
+
 }
