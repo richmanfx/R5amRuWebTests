@@ -2,13 +2,12 @@ package ru.r5am.utils;
 
 
 import java.util.concurrent.TimeUnit;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Locatable;
+import static com.codeborne.selenide.Selenide.sleep;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
 
@@ -17,7 +16,6 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
  */
 public class FlashElement extends AbstractWebDriverEventListener {
 
-    private final Logger log = LogManager.getLogger();
     final private long interval;
     private final int count;
     private final String color;
@@ -66,11 +64,7 @@ public class FlashElement extends AbstractWebDriverEventListener {
      */
     private void changeColor(String color, WebElement element, JavascriptExecutor js) {
         js.executeScript("arguments[0].style.backgroundColor = '" + color + "'", element);
-        try {
-            Thread.sleep(interval);
-        } catch (InterruptedException ex) {
-            log.error("Exception: {}", ex.toString());
-        }
+        sleep(interval);
     }
 
 }

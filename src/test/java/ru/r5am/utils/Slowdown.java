@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import static com.codeborne.selenide.Selenide.sleep;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
 
@@ -25,52 +26,43 @@ public class Slowdown extends AbstractWebDriverEventListener {
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         log.debug(String.format("Start method: %s", Thread.currentThread().getStackTrace()[1].getMethodName()));
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeNavigateBack(WebDriver driver) {
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeNavigateForward(WebDriver driver) {
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeClickOn(WebElement element, WebDriver driver) {
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeChangeValueOf(WebElement element, WebDriver driver, CharSequence[] keysToSend) {
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeGetText(WebElement element, WebDriver driver) {
-        sleep();
+        sleep(timeout);
     }
 
 
     @Override
     public void beforeScript(String script, WebDriver driver) {
-        sleep();
-    }
-
-
-    private void sleep() {
-        try {
-            Thread.sleep(timeout);
-        } catch (InterruptedException ex) {
-            log.error("Exception: {}", ex.toString());
-        }
+        sleep(timeout);
     }
 
 }
