@@ -5,15 +5,15 @@ import java.util.concurrent.TimeUnit;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 
 
 /**
- * Листенер для подсветки web-элемента
+ * Листенер подсветки web-элемента
  */
 public class FlashElement extends AbstractWebDriverEventListener {
 
